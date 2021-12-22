@@ -15,6 +15,27 @@ Library           RPA.Archive
 ${URL}=           https://robotsparebinindustries.com/
 ${URL_Download}=    https://robotsparebinindustries.com/orders.csv
 
+*** Tasks ***
+Order robots from RobotSpareBin Industries Inc
+    Open the robot order website
+    Download the CSV file
+    ${orders}=    Get orders
+    FOR    ${row}    IN    @{orders}
+        Log    Item numero ${row}
+        Close the annoyng modal
+        Fill the form    ${row}
+        Preview the robot
+        Submit the order
+        Store the receipt as a PDF file    ${row}[Order number]
+        Take a screenshot of the robot    ${row}[Order number]
+        Embed the robot screenshot to the receipt PDF file    ${row}[Order number]
+        Go to order another robot
+        Delete Images of Robots    ${row}[Order number]
+    END
+    Close Site
+    Create a ZIP file of the receipts
+    Remove folder of PDFs
+
 *** Keywords ***
 Open the robot order website
     Open Available Browser    ${URL}
@@ -105,24 +126,3 @@ Create a ZIP file of the receipts
 
 Remove folder of PDFs
     Remove Directory    ${OUTPUT_DIR}${/}generated_files    recursive= True
-
-*** Tasks ***
-Order robots from RobotSpareBin Industries Inc
-    Open the robot order website
-    Download the CSV file
-    ${orders}=    Get orders
-    FOR    ${row}    IN    @{orders}
-        Log    Item numero ${row}
-        Close the annoyng modal
-        Fill the form    ${row}
-        Preview the robot
-        Submit the order
-        Store the receipt as a PDF file    ${row}[Order number]
-        Take a screenshot of the robot    ${row}[Order number]
-        Embed the robot screenshot to the receipt PDF file    ${row}[Order number]
-        Go to order another robot
-        Delete Images of Robots    ${row}[Order number]
-    END
-    Close Site
-    Create a ZIP file of the receipts
-    Remove folder of PDFs
