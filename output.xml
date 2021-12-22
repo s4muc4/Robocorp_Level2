@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.2 (Python 3.7.5 on win32)" generated="20211221 00:30:45.887" rpa="false" schemaversion="2">
+<suite id="s1" name="Robot Interactive Console" source="c:\Users\PICHAU\.vscode\extensions\robocorp.robotframework-lsp-0.34.0\src\robotframework_ls\vendored\robotframework_interactive\robot_interactive_console.robot">
+<test id="s1-t1" name="Default Task/Test">
+<kw name="Interpreter Main Loop" library="MainLoop">
+<kw name="Input Text" library="RPA.Browser.Selenium">
+<arg>/html/body/div/div/div[1]/div/div[1]/form/div[3]/input</arg>
+<arg>1</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<kw name="Capture Page Screenshot" library="RPA.Browser.Selenium">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" starttime="20211221 00:31:57.092" endtime="20211221 00:31:57.093"/>
+</kw>
+<msg timestamp="20211221 00:31:57.096" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211221 00:31:57.091" endtime="20211221 00:31:57.096"/>
+</kw>
+<kw name="Input Text" library="RPA.Browser.Selenium">
+<arg>/html/body/div/div/div[1]/div/div[1]/form/div[3]/input</arg>
+<arg>1</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<kw name="Capture Page Screenshot" library="RPA.Browser.Selenium">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" starttime="20211221 00:32:09.303" endtime="20211221 00:32:09.304"/>
+</kw>
+<msg timestamp="20211221 00:32:09.305" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211221 00:32:09.303" endtime="20211221 00:32:09.305"/>
+</kw>
+<status status="PASS" starttime="20211221 00:30:45.944" endtime="20211221 00:32:23.074"/>
+</kw>
+<status status="PASS" starttime="20211221 00:30:45.943" endtime="20211221 00:32:23.075"/>
+</test>
+<status status="PASS" starttime="20211221 00:30:45.890" endtime="20211221 00:32:23.077"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Robot Interactive Console">Robot Interactive Console</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
