@@ -10,18 +10,21 @@ Library           RPA.Tables
 Library           RPA.PDF
 Library           OperatingSystem
 Library           RPA.Archive
-
-*** Variables ***
-${URL}=           https://robotsparebinindustries.com/
-${URL_Download}=    https://robotsparebinindustries.com/orders.csv
+Library           RPA.Dialogs
+Library           RPA.Robocorp.Vault
+Library           Dialogs
 
 *** Tasks ***
 Order robots from RobotSpareBin Industries Inc
-    Open the robot order website
-    Download the CSV file
+    ${url}=    Get URL RobotSpareBin Industries Inc from vault
+    ${result_form}=    Input form Dialog to get URL of download of CSV
+    Log    Your Email is: ${result_form.email}
+    Log    CSV URL: ${result_form.url}
+    Open the robot order website    ${url}
+    Download the CSV file    ${result_form.url}
     ${orders}=    Get orders
     FOR    ${row}    IN    @{orders}
-        Log    Item numero ${row}
+        Log    Item number ${row}
         Close the annoyng modal
         Fill the form    ${row}
         Preview the robot
@@ -38,11 +41,13 @@ Order robots from RobotSpareBin Industries Inc
 
 *** Keywords ***
 Open the robot order website
-    Open Available Browser    ${URL}
+    [Arguments]    ${url}
+    Open Available Browser    ${url}
     Wait Until Element Is Visible    //*[@id="root"]/header/div/ul/li[2]/a
     Click Element    //*[@id="root"]/header/div/ul/li[2]/a
 
 Download the CSV file
+    [Arguments]    ${URL_Download}
     Download    ${URL_Download}    overwrite=True
 
 Close the annoyng modal
@@ -126,3 +131,17 @@ Create a ZIP file of the receipts
 
 Remove folder of PDFs
     Remove Directory    ${OUTPUT_DIR}${/}generated_files    recursive= True
+
+Input form Dialog to get URL of download of CSV
+    Add heading    Send URL of orders (csv)
+    Add text input    email    label=E-mail adress
+    Add text input    url
+    ...    label=URL of CSV
+    ...    placeholder=insert here the URL of download of CSV
+    ${result}=    Run dialog
+    [Return]    ${result}
+
+Get URL RobotSpareBin Industries Inc from vault
+    ${secret}=    Get Secret    urls
+    Log    url: ${secret}[url_sparebin]
+    [Return]    ${secret}[url_sparebin]
